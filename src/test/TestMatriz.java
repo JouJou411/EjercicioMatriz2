@@ -16,5 +16,8 @@ public class TestMatriz {
         Matriz m = new Matriz();
         m.grupos();
         m.materias();
+        m.alumnos();
+        m.cali();
+        m.mostrarMatriz();
     }
 }
