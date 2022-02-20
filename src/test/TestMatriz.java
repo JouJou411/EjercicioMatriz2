@@ -12,6 +12,7 @@ import domain.Matriz;
  * @author Joabp
  */
 public class TestMatriz {
+
     public static void main(String[] args) {
         Matriz m = new Matriz();
         m.grupos();
