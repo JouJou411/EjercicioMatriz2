@@ -8,7 +8,10 @@ import java.util.Scanner;
  */
 public class Matriz {
 
-    float matriz[][][][];
+    int[][][][] cali;
+    String grupo[];
+    String mat[][];
+    String alumno[][][];
     Scanner s = new Scanner(System.in);
 
     public Matriz() {
@@ -21,38 +24,66 @@ public class Matriz {
                 System.out.println("¿Cuántos grupos hay?");
                 numGrup = s.nextInt();
             } while (!numPositivos(numGrup));
-            matriz = new float[numGrup][][][];
+            cali = new int[numGrup][][][];
+            grupo = new String[numGrup];
+            mat = new String[numGrup][];
+            alumno = new String[numGrup][][];
         } catch (Exception e) {
             System.out.println("No se ah podido crear los Grupos");
         }
     }
 
+    public void nombreGrupo() {
+        try {
+            for (int i = 0; i < grupo.length; i++) {
+                System.out.println("Digite el nombre del grupo: ");
+                String nomGrup = s.nextLine();
+                grupo[i] = nomGrup;
+            }
+        } catch (Exception e) {
+        }
+    }
+
     public void materias() {
         try {
-            for (int i = 0; i < matriz.length; i++) {
+            for (int i = 0; i < cali.length; i++) {
                 int numMat = 0;
                 do {
                     System.out.println("¿Cuántas materias hay en el grupo " + i + "?");
                     numMat = s.nextInt();
                 } while (!numPositivos(numMat));
-                matriz[i] = new float[numMat][][];
+                cali[i] = new int[numMat][][];
             }
         } catch (Exception e) {
             System.out.println("No se ah podido crear las materias");
         }
     }
 
+    public void nomMaterias() {
+        try {
+            for (int i = 0; i < mat.length; i++) {
+                for (int j = 0; j < mat[i].length; j++) {
+                    String nomMat;
+                    System.out.println("Digite el nombre de la materia: ");
+                    nomMat = s.nextLine();
+                    mat[i][j] = nomMat;
+                }
+            }
+        } catch (Exception e) {
+        }
+    }
+
     public void alumnos() {
         try {
-            for (int i = 0; i < matriz.length; i++) {
-                for (int j = 0; j < matriz[i].length; j++) {
+            for (int i = 0; i < cali.length; i++) {
+                for (int j = 0; j < cali[i].length; j++) {
                     int numAlum = 0;
                     do {
                         System.out.println("¿Cuántos alumnos hay en el grupo " + i + " en la materia "
                                 + j + " ?");
                         numAlum = s.nextInt();
                     } while (!numPositivos(numAlum));
-                    matriz[i][j] = new float[numAlum][];
+                    cali[i][j] = new int[numAlum][];
                 }
             }
         } catch (Exception e) {
@@ -62,16 +93,16 @@ public class Matriz {
 
     public void cali() {
         try {
-            for (int i = 0; i < matriz.length; i++) {
-                for (int j = 0; j < matriz[i].length; j++) {
-                    for (int k = 0; k < matriz[i][j].length; k++) {
-                        matriz[i][j][k] = new float[1];
-                        float calificacion = 0;
+            for (int i = 0; i < cali.length; i++) {
+                for (int j = 0; j < cali[i].length; j++) {
+                    for (int k = 0; k < cali[i][j].length; k++) {
+                        cali[i][j][k] = new int[1];
+                        int calificacion = 0;
                         do {
                             System.out.println("Digite la calificacion de la materia " + k + " del alumno " + j + " del grupo " + i);
-                            calificacion = s.nextFloat();
-                        } while (!numPositivos(calificacion, 10.1f));
-                        matriz[i][j][k][0] = calificacion;
+                            calificacion = s.nextInt();
+                        } while (!numPositivos(calificacion, 100));
+                        cali[i][j][k][0] = calificacion;
                     }
                 }
             }
@@ -82,14 +113,14 @@ public class Matriz {
 
     public void mostrarMatriz() {
         try {
-            for (int i = 0; i < matriz.length; i++) {
+            for (int i = 0; i < cali.length; i++) {
                 System.out.println("--------------------------------------------------------------------------------");
-                System.out.println("Grupo: " + i);
-                for (int j = 0; j < matriz[i].length; j++) {
-                    System.out.println("Materia: " + j);
-                    for (int k = 0; k < matriz[i][j].length; k++) {
+                System.out.println("Grupo: " + cali[i]);
+                for (int j = 0; j < cali[i].length; j++) {
+                    System.out.println("Materia: " + cali[i][j]);
+                    for (int k = 0; k < cali[i][j].length; k++) {
                         System.out.println("  Alumno    Calificacion");
-                        System.out.println("    " + k + "       " + matriz[i][j][k][0]);
+                        System.out.println("    " + cali[i][j][k] + "       " + cali[i][j][k][0]);
                     }
                 }
             }
@@ -101,7 +132,7 @@ public class Matriz {
         return x > 0;
     }
 
-    private boolean numPositivos(float x, float y) {
+    private boolean numPositivos(int x, int y) {
         return x >= 0 && x <= 10;
     }
 }
