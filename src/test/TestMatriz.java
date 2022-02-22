@@ -16,8 +16,11 @@ public class TestMatriz {
     public static void main(String[] args) {
         Matriz m = new Matriz();
         m.grupos();
+        m.nombreGrupo();
         m.materias();
+        m.nomMaterias();
         m.alumnos();
+        m.nomAlumno();
         m.cali();
         m.mostrarMatriz();
     }
